@@ -3,17 +3,20 @@ import { Form, Modal, Button } from 'react-bootstrap'
 import { useRef } from 'react'
 import { useBudgets } from '../contexts/BudgetsContext'
 
-export default function AddBudgetModal({show, handleClose}) {
+export default function AddExpenseModal({show, handleClose, defaultBudgetId}) {
 
-    const nameRef = useRef()
-    const maxRef = useRef()
-    const {addBudget} = useBudgets()
+    const descriptionRef = useRef()
+    const amountRef = useRef()
+    const budgetIdRef = useRef()
+    const {addExpense, budgets} = useBudgets()
+
     function handleSubmit(e){
         e.preventDefault()
-            addBudget(
+            addExpense(
             {
-                name: nameRef.current.value,
-                max: parseFloat(maxRef.current.value),
+                description: descriptionRef.current.value,
+                amount: parseFloat(amountRef.current.value),
+                budgetId: budgetIdRef.current.value
         })
 
         handleClose()
@@ -23,7 +26,7 @@ export default function AddBudgetModal({show, handleClose}) {
     <Modal show = {show} onHide = {handleClose}>
         <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
-            <Modal.Title>New category</Modal.Title>
+            <Modal.Title>New expense</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>

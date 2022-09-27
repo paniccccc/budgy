@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Container, Stack } from 'react-bootstrap';
+import AddBudgetModal from './components/addBudgetModal';
 import BudgetCard from './components/budgetCard'
+import { useBudgets } from './contexts/BudgetsContext';
+
 function App() {
+  
+  const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
+  const {budgets, getBudgetExpenses} = useBudgets()
+  
   return (
+    <>
    <Container className="my-4">
 
     <Stack direction = "horizontal" gap = "2" className="mb-4">
-      <h1 className="me-auto" >budgy<span role="img">📊</span></h1>
-      <Button variant="success">Add Budget</Button>
+      <h1 className="me-auto" >budgy<span role="img" aria-label='graph'>📊</span></h1>
+      <Button variant="success" onClick={()=> setShowAddBudgetModal(true)}>Add Budget</Button>
       <Button variant="danger">Add Expense</Button>
     </Stack>
 
@@ -17,11 +25,25 @@ function App() {
     alignItems:"flex-start"
     }}>
     </div>
-    <BudgetCard name = "Misc" gray amount ={100} max={1500}></BudgetCard>
 
-   
+    {budgets.map(budget=>{
+      
+      const amount = getBudgetExpenses(budget.id).reduce((total,expense)=>total + expense.amount, 0)
+
+      return(
+      <BudgetCard 
+        key={budget.id}
+        name = {budget.name} 
+        amount = {amount} 
+        max = {budget.max}
+      />
+      )})}
+
    </Container>
-  );
+   <AddBudgetModal show={showAddBudgetModal} handleClose={()=>
+    setShowAddBudgetModal(false)}/>
+    </>
+   )
 }
 
 export default App;
