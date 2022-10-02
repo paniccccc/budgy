@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, ProgressBar, Stack } from "react-bootstrap";
 import { currFormatter } from "../utils";
 
-export default function BudgetCard({name, amount, max, gray}) {
+export default function BudgetCard({name, amount, max, gray, openAddExpenseClick}) {
 
 
   const classNames=[]
@@ -36,7 +36,7 @@ export default function BudgetCard({name, amount, max, gray}) {
         now={amount}/>
 
         <Stack direction="horizontal" gap="2" className="mt-4">
-          <Button variant="outline-danger ms-auto">Add Expenses</Button>
+          <Button variant="outline-danger" className="ms-auto" onClick={openAddExpenseClick}>Add Expenses</Button>
           <Button variant="outline-dark">View Expenses</Button>
         </Stack>
     

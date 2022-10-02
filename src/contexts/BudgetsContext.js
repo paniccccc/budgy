@@ -8,18 +8,7 @@ export function useBudgets(){
     return useContext(BudgetsContext)
 }
 
-// {//budget array
-//     id:
-//     name:
-//     max:
-// }
 
-// {//expenses
-//     id:
-//     budgetID:
-//     amount:
-//     descrp:
-// }
 
 
 export const BudgetsProvider = ({children})=>{
