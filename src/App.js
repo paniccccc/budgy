@@ -44,7 +44,7 @@ function App() {
         name = {budget.name} 
         amount = {amount} 
         max = {budget.max}
-        openAddExpenseClick={()=>openAddExpenseModal(budget.id)}
+        onAddExpenseClick={()=>openAddExpenseModal(budget.id)}
       />
       )})}
 
@@ -52,8 +52,9 @@ function App() {
    <AddBudgetModal show={showAddBudgetModal} handleClose={()=>
     setShowAddBudgetModal(false)}/>
 
-    <AddExpenseModal show={showAddExpenseModal} handleClose={()=>
-    setShowAddExpenseModal(false)}/>
+    <AddExpenseModal show={showAddExpenseModal}
+    defaultBudgetId = {AddExpenseModalBudgetId}
+    handleClose={()=> setShowAddExpenseModal(false)}/>
     </>
    )
 }

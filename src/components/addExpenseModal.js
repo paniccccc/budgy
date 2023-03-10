@@ -12,12 +12,11 @@ export default function AddExpenseModal({show, handleClose, defaultBudgetId}) {
 
     function handleSubmit(e){
         e.preventDefault()
-            addExpense(
-            {
-                description: descriptionRef.current.value,
-                amount: parseFloat(amountRef.current.value),
-                budgetId: budgetIdRef.current.value
-        })
+        addExpense({
+            description: descriptionRef.current.value,
+            amount: parseFloat(amountRef.current.value),
+            budgetId: budgetIdRef.current.value
+          })
 
         handleClose()
     }
@@ -50,7 +49,11 @@ export default function AddExpenseModal({show, handleClose, defaultBudgetId}) {
                     ref={budgetIdRef}>
                         <option id ={defaultBudgetId}>Uncategorized</option>
                     {budgets.map(budget=>(
-                        <option key={budget.id} value={budget.id}>{budget.name}</option>
+                        <option 
+                        key={budget.id} 
+                        value={budget.id}>
+                        {budget.name}
+                        </option>
                     ))}
                     </Form.Select>
                     
